@@ -1,0 +1,9 @@
+dotnet new webapi -o HelloWorld
+cd HelloWorld
+dotnet add package Microsoft.AspNetCore.App
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet restore
+
+dotnet ef migrations add InitialCreate
+dotnet ef database update
