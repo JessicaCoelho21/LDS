@@ -1,0 +1,2 @@
+dotnet add package System.Data.SQLClient
+(falta base de dados, com elementos da tabela dos mesmo do Modelo criado)
