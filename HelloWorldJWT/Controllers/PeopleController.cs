@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HelloWorldJWT.Services.Controllers
 {
@@ -121,8 +123,8 @@ namespace HelloWorldJWT.Services.Controllers
         //Authenticate
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        private IActionResult Authenticate([FromBody]AuthenticationModel authModel)
-        {
+        public IActionResult Authenticate([FromBody]AuthenticationModel authModel)
+        {  
             var person = _personService.Authenticate(authModel.Username, authModel.Password);
 
             if (person == null)
@@ -134,7 +136,7 @@ namespace HelloWorldJWT.Services.Controllers
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, person.ID.ToString())
                 }),
